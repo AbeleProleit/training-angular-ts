@@ -7,4 +7,7 @@ const numbers4 = [...numbers, 91, ...numbers2]; // konkateniert arrays
 
 console.log(numbers4);
 
+// Tupel
+let address: [string, number] = ['hauptstr.', 21];
+
 export default {};
