@@ -1,6 +1,6 @@
-describe('My First Test', () => {
-  it('Visits the initial project page', () => {
-    cy.visit('/')
-    cy.contains('app is running!')
-  })
-})
+describe('test app component', () => {
+  it('visit init page', () => {
+    cy.visit('/');
+    cy.get('h1').contains('Hello, proleit');
+  });
+});
