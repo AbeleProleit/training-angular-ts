@@ -6,6 +6,7 @@
 // import './lib/002.fnct.syntax'
 // import './lib/002.fnct.params'
 // import './lib/002.fnct.syntax-arrow'
-import './lib/002.training.impl'
-
+// import './lib/002.training.impl'
+// import './lib/002.fnct.async'
+import './lib/002.training.async.impl'
 
