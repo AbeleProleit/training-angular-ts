@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'pl-progress-bar',
@@ -43,5 +43,17 @@ export class ProgressBarComponent {
       window.clearInterval(this.intervalId);
       this.intervalId = undefined;
     }
+  }
+
+  @HostListener('click', ['$event'])
+  toggleTimer($event: MouseEvent) {
+    if ($event.ctrlKey) {
+      this.counter = 0;
+      return;
+    }
+
+    if (this.intervalId) {
+      this.stopTimer();
+    } else this.startTimer();
   }
 }

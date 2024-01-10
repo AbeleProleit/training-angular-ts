@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { UserComponent } from './user/user.component';
-import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { ProgressBarComponent } from './samples/progress-bar/progress-bar.component';
+import { BindingsComponent } from './bindings/bindings.component';
 
 @Component({
   selector: 'pl-root',
