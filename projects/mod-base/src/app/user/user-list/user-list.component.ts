@@ -14,4 +14,7 @@ export class UserListComponent {
   updateSelectedUser($event: User) {
     this.selectedUser = $event;
   }
+  removeUser(index: number) {
+    if (this.userList.length >= 1) this.userList.splice(index, 1);
+  }
 }

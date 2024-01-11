@@ -1,5 +1,7 @@
 <p>Selected User: {{selectedUser?.lastname ?? ''}}</p>
 
+<button plDanger="delete user?" (confirmed)="removeUser(0)">Delete First User: {{userList[0].firstname}}</button>
+
 @for (user of userList; track $index) {
 <pl-user-list-item [class.even]="$even" [class.selected]="selectedUser === user" (selectedUser)="updateSelectedUser($event)" [userData]="user"></pl-user-list-item>
 }

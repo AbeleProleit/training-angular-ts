@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserListItemComponent } from './user/user-list/user-list-item/user-list-item.component';
+import { DangerDirective } from './helper/directive/Danger.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserListItemComponent } from './user/user-list/user-list-item/user-list
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DangerDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
