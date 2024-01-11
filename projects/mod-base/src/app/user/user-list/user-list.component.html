@@ -1,3 +1,5 @@
 <p>Selected User: {{selectedUser?.lastname ?? ''}}</p>
-<pl-user-list-item (selectedUser)="updateSelectedUser($event)" [userData]="userList[0]"></pl-user-list-item>
-<pl-user-list-item (selectedUser)="updateSelectedUser($event)" [userData]="userList[1]"></pl-user-list-item>
+
+@for (user of userList; track $index) {
+<pl-user-list-item [class.even]="$even" [class.selected]="selectedUser === user" (selectedUser)="updateSelectedUser($event)" [userData]="user"></pl-user-list-item>
+}

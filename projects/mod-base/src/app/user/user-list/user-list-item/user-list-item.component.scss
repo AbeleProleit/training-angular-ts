@@ -1,0 +1,9 @@
+:host{
+  color: rgb(0, 177, 177);
+  &.even{
+    color: hotpink;
+  }
+  &.selected{
+    text-decoration: underline;
+  }
+}
