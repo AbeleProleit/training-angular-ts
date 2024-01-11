@@ -1,3 +1,3 @@
-<p>user-list works!</p>
-<pl-user-list-item [userData]="userList[0]"></pl-user-list-item>
-<pl-user-list-item [userData]="userList[1]"></pl-user-list-item>
+<p>Selected User: {{selectedUser?.lastname ?? ''}}</p>
+<pl-user-list-item (selectedUser)="updateSelectedUser($event)" [userData]="userList[0]"></pl-user-list-item>
+<pl-user-list-item (selectedUser)="updateSelectedUser($event)" [userData]="userList[1]"></pl-user-list-item>

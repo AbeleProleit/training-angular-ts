@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { getUsr } from '../../helper/mockdata/users';
+import { User } from '../user';
 
 @Component({
   selector: 'pl-user-list',
@@ -8,4 +9,9 @@ import { getUsr } from '../../helper/mockdata/users';
 })
 export class UserListComponent {
   userList = getUsr();
+  selectedUser?: User;
+
+  updateSelectedUser($event: User) {
+    this.selectedUser = $event;
+  }
 }
