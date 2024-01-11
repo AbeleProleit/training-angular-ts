@@ -13,12 +13,12 @@ import { DangerDirective } from './helper/directive/Danger.directive';
     AppComponent,
     UserComponent,
     UserListComponent,
-    UserListItemComponent
+    UserListItemComponent,
+    DangerDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DangerDirective
   ],
   providers: [],
   bootstrap: [AppComponent]

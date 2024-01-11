@@ -2,7 +2,7 @@ import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } fro
 
 @Directive({
   selector: 'button[plDanger]',
-  standalone: true,
+  standalone: false,
 })
 export class DangerDirective {
 
