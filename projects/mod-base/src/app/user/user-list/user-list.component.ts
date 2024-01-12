@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { getUsr } from '../../helper/mockdata/users';
 import { User } from '../user';
+import { UserService } from '../User.service';
 
 @Component({
   selector: 'pl-user-list',
@@ -8,13 +8,15 @@ import { User } from '../user';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
-  userList = getUsr();
+  userList = this.userService.users();
   selectedUser?: User;
 
   updateSelectedUser($event: User) {
     this.selectedUser = $event;
   }
   removeUser(index: number) {
-    if (this.userList.length >= 1) this.userList.splice(index, 1);
+    this.userService.deleteAtIndex(index)
+    // if (this.userList.length >= 1) this.userList.splice(index, 1);
   }
+  constructor(readonly userService: UserService) {}
 }
