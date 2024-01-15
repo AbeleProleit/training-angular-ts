@@ -1,4 +1,4 @@
-export enum taskState{
+export enum taskState {
   Unassigned,
   Backlog,
   InProgress,
@@ -8,9 +8,10 @@ export enum taskState{
   Blocked,
 }
 
-export interface task{
+export interface task {
   title: string;
   description: string;
   id?: number;
   status: taskState;
+  priority: number;
 }

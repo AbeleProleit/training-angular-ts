@@ -9,10 +9,9 @@ import { taskState } from '../../../task/task';
 export class TaskColumnComponent {
   @Input() stateDescriptor: taskState = taskState.Unassigned;
 
-  get stateDescriptorText():string{
-    return taskState[this.stateDescriptor]
+  get stateDescriptorText(): string {
+    return taskState[this.stateDescriptor];
   }
 
-  constructor() {
-  }
+  constructor() {}
 }
