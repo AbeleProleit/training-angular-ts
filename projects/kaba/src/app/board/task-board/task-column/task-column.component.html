@@ -1,3 +1,5 @@
 <h3>task-column {{stateDescriptorText}}</h3>
 <hr />
-<pl-task></pl-task>
+@for (task of columnTasks(); track $index) {
+  <pl-task [task]="task"></pl-task>
+}

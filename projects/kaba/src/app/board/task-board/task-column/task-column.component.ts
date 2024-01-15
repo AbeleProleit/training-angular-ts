@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, computed } from '@angular/core';
 import { taskState } from '../../../task/task';
 import { TaskService } from '../../../task/task.service';
 
@@ -8,11 +8,18 @@ import { TaskService } from '../../../task/task.service';
   styleUrl: './task-column.component.scss',
 })
 export class TaskColumnComponent {
-  @Input() stateDescriptor: taskState = taskState.Unassigned;
+  // what state this column represents
+  @Input() containedState: taskState = taskState.Unassigned;
 
   get stateDescriptorText(): string {
-    return taskState[this.stateDescriptor];
+    return taskState[this.containedState];
   }
 
-  constructor(private readonly taskService:TaskService) {}
+  columnTasks = computed(() =>
+    this.taskService
+      .tasks()
+      .filter((task) => task.status === this.containedState)
+  );
+
+  constructor(private readonly taskService: TaskService) {}
 }
