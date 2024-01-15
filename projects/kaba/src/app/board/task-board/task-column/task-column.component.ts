@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { taskState } from '../../../task/task';
+import { TaskService } from '../../../task/task.service';
 
 @Component({
   selector: 'pl-task-column',
@@ -13,5 +14,5 @@ export class TaskColumnComponent {
     return taskState[this.stateDescriptor];
   }
 
-  constructor() {}
+  constructor(private readonly taskService:TaskService) {}
 }
