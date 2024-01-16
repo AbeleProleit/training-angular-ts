@@ -24,6 +24,7 @@ export class TaskService {
         this.tasks.set(tasks);
       })
       .catch((error) => console.log(error));
+    this.unsetSelectedTask();
   }
 
   async updateTask(updatedTask: task) {
@@ -44,8 +45,29 @@ export class TaskService {
     });
   }
 
-  createTask(newTask: task) {
-    throw new Error('Function not implemented.');
+  async createTask(newTask: task) {
+    const requestOptions = {
+      method: 'Post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTask),
+    };
+
+    fetch(this.tasksUrl, requestOptions).then((response) => {
+      if (response.ok) this.loadTasks();
+    });
+  }
+
+  async deleteTask(deletedTask: task) {
+    if (!deletedTask.id) return;
+
+    const requestOptions = {
+      method: 'Delete',
+    };
+    const taskId = deletedTask.id;
+
+    fetch(`${this.tasksUrl}/${taskId}`, requestOptions).then((response) => {
+      if (response.ok) this.loadTasks();
+    });
   }
 
   updateSelectedTask(selectedTask: task) {
