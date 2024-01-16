@@ -1,9 +1,5 @@
 import { Component, effect } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
 import { task } from '../../../task/task';
 
@@ -32,11 +28,24 @@ export class TaskEditComponent {
     });
   }
 
-  onSubmit() {
-    //Todo call for data update
+  async onSubmit() {
+    const submittableTask: task = {
+      title: this.taskForm.value.title!,
+      description: this.taskForm.value.description!,
+      status: this.taskForm.value.status!,
+      priority: this.taskForm.value.priority!,
+    };
+
+    if (this.taskCopy) {
+      submittableTask.id = this.taskCopy.id;
+    }
+
+    this.taskService.updateTask(submittableTask)
+
     console.log(this.taskForm.value);
 
     this.taskForm.reset();
+    this.taskCopy = undefined;
   }
 
   onReset() {
