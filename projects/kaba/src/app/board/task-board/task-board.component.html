@@ -2,6 +2,7 @@
 <button (click)="taskService.unsetSelectedTask()">clear Selection</button>
 @if(taskService.selectedTask()){
   <p>selected Task: {{taskService.selectedTask()?.title}}</p>
+  <pl-task-edit  ></pl-task-edit>
 }
 <div class="columnContainer">
   <pl-task-column [containedState]="1"></pl-task-column>
