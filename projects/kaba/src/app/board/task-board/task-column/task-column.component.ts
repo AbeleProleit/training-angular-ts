@@ -1,5 +1,5 @@
 import { Component, Input, computed } from '@angular/core';
-import { taskState } from '../../../task/task';
+import { taskState, task } from '../../../task/task';
 import { TaskService } from '../../../task/task.service';
 
 @Component({
@@ -21,5 +21,14 @@ export class TaskColumnComponent {
       .filter((task) => task.status === this.containedState)
   );
 
-  constructor(private readonly taskService: TaskService) {}
+  constructor(readonly taskService: TaskService) {}
+
+  update() {
+    const task = this.columnTasks()[0];
+    this.taskService.updateTask(task);
+  }
+
+  updateSelectedTask(selectedTask: task) {
+    this.taskService.updateSelectedTask(selectedTask);
+  }
 }

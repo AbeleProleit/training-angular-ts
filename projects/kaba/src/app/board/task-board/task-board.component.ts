@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TaskService } from '../../task/task.service';
 
 @Component({
   selector: 'pl-task-board',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './task-board.component.scss',
 })
 export class TaskBoardComponent {
-
+  constructor(readonly taskService: TaskService) {}
 }

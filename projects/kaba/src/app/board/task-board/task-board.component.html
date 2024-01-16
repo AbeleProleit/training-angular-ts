@@ -1,4 +1,8 @@
 <p>Task Board</p>
+<button (click)="taskService.unsetSelectedTask()">clear Selection</button>
+@if(taskService.selectedTask()){
+  <p>selected Task: {{taskService.selectedTask()?.title}}</p>
+}
 <div class="columnContainer">
   <pl-task-column [containedState]="1"></pl-task-column>
   <pl-task-column [containedState]="2"></pl-task-column>

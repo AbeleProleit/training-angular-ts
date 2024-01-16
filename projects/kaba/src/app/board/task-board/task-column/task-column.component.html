@@ -1,5 +1,7 @@
+<button (click)="update()">update</button>
+
 <h3>task-column {{stateDescriptorText}}</h3>
 <hr />
 @for (task of columnTasks(); track $index) {
-  <pl-task [task]="task"></pl-task>
+  <pl-task [task]="task" (selectedTask)="updateSelectedTask($event)"></pl-task>
 }

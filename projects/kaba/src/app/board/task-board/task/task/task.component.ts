@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { task, taskState } from '../../../../task/task';
 
 @Component({
@@ -7,5 +13,18 @@ import { task, taskState } from '../../../../task/task';
   styleUrl: './task.component.scss',
 })
 export class TaskComponent {
-  @Input() task?: task = {title:"dummy title", description:"dummy description", status:taskState.Unassigned, priority:0};
+  @Input({ required: true }) task?: task = {
+    title: 'dummy title',
+    description: 'dummy description',
+    status: taskState.Unassigned,
+    priority: 0,
+  };
+  @Output() selectedTask = new EventEmitter<task>();
+
+  @HostListener('click')
+  triggerOutput() {
+    // taskState.Unassigned should only ever be present in dummy data
+    if (this.task?.status !== taskState.Unassigned)
+      this.selectedTask.emit(this.task);
+  }
 }
