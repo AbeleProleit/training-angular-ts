@@ -8,5 +8,5 @@
   <label for="priority">priority: </label>
   <input id="priority" type="number" formControlName="priority" />
   <button type="submit" [disabled]="!taskForm.valid">Submit</button>
-  <button type="reset">Reset</button>
+  <button type="button" (click)="onReset()">Reset</button> <!--in a form buttons are type submit by default !-->
 </form>

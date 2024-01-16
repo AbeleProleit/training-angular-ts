@@ -1,11 +1,11 @@
-import { Component, computed } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
 } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
+import { task } from '../../../task/task';
 
 @Component({
   selector: 'pl-task-edit',
@@ -13,8 +13,7 @@ import { TaskService } from '../../../task/task.service';
   styleUrl: './task-edit.component.scss',
 })
 export class TaskEditComponent {
-  taskTitle = computed(() => this.taskService.selectedTask()?.title);
-
+  //Todo Form validation required
   taskForm = new FormGroup({
     title: new FormControl('title'),
     description: new FormControl('description'),
@@ -22,13 +21,15 @@ export class TaskEditComponent {
     priority: new FormControl(99),
   });
 
-  taskEditForm?: FormGroup;
-  inputControl = new FormControl('test', Validators.required);
+  private taskCopy: task | undefined;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     readonly taskService: TaskService
   ) {
+    effect(() => {
+      this.setForm(taskService.selectedTask());
+    });
   }
 
   onSubmit() {
@@ -39,13 +40,23 @@ export class TaskEditComponent {
   }
 
   onReset() {
-    //Todo revert Changes
-    throw Error('Method onReset not implemented yet');
+    this.setForm(this.taskCopy, true);
   }
 
-  setForm(){
-    console.log("update");
+  setForm(task: task | undefined, isReset: boolean = false) {
+    if (!task) {
+      this.taskForm.reset();
+      this.taskCopy = undefined;
+      return;
+    }
 
+    if (!isReset) this.taskCopy = structuredClone(task);
+
+    this.taskForm.setValue({
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      priority: task.priority,
+    });
   }
-
 }
