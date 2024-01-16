@@ -1,3 +1,12 @@
-input
-<input type="text" [formControl]="inputControl">
-<p>output {{inputControl.value}}</p>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <label for="title">Title: </label>
+  <input id="title" type="text" formControlName="title" />
+  <label for="description">Description: </label>
+  <input id="description" type="text" formControlName="description" />
+  <label for="status">status: </label> <!-- TODO Drop down selector -->
+  <input id="status" type="number" formControlName="status" />
+  <label for="priority">priority: </label>
+  <input id="priority" type="number" formControlName="priority" />
+  <button type="submit" [disabled]="!taskForm.valid">Submit</button>
+  <button type="reset">Reset</button>
+</form>
