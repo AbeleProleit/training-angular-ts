@@ -1,5 +1,5 @@
 import { Component, effect } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
 import { task } from '../../../task/task';
 
@@ -9,11 +9,10 @@ import { task } from '../../../task/task';
   styleUrl: './task-edit.component.scss',
 })
 export class TaskEditComponent {
-  //Todo Form validation required
   taskForm = new FormGroup({
-    title: new FormControl('title'),
-    description: new FormControl('description'),
-    status: new FormControl(1),
+    title: new FormControl('title', [Validators.required, Validators.minLength(3)]),
+    description: new FormControl('description', [Validators.required, Validators.minLength(3)]),
+    status: new FormControl(1, [Validators.min(1), Validators.max(6)]),
     priority: new FormControl(99),
   });
 
@@ -32,8 +31,8 @@ export class TaskEditComponent {
     const submittableTask: task = {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
-      status: this.taskForm.value.status!,
-      priority: this.taskForm.value.priority!,
+      status: this.taskForm.value.status === null? 1 : this.taskForm.value.status!,
+      priority: this.taskForm.value.priority === null? 0 : this.taskForm.value.priority!,
     };
 
     if (this.taskCopy) {
@@ -68,4 +67,5 @@ export class TaskEditComponent {
       priority: task.priority,
     });
   }
+
 }
