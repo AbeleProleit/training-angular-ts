@@ -19,14 +19,10 @@ export class TaskColumnComponent {
     this.taskService
       .tasks()
       .filter((task) => task.status === this.containedState)
+      .sort((taskA, taskB) => taskB.priority - taskA.priority)
   );
 
   constructor(readonly taskService: TaskService) {}
-
-  update() {
-    const task = this.columnTasks()[0];
-    this.taskService.updateTask(task);
-  }
 
   updateSelectedTask(selectedTask: task) {
     this.taskService.updateSelectedTask(selectedTask);
