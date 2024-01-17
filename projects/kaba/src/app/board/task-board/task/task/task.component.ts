@@ -34,7 +34,6 @@ export class TaskComponent {
 
   @HostListener('dblclick')
   onDoubleClick() {
-    console.log('double click');
     this.router.navigate(['/board/edit', this.taskService.selectedTask()?.id ])
   }
 }

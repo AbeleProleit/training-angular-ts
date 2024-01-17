@@ -6,6 +6,7 @@ import { TaskComponent } from './task/task/task.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ConfirmDirective } from '../../directive/confirm.directive';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
     TaskColumnComponent,
     TaskComponent,
     TaskEditComponent,
+    ConfirmDirective
   ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   exports: [TaskBoardComponent, TaskColumnComponent],

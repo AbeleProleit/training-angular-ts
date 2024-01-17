@@ -23,7 +23,7 @@ export class TaskEditComponent implements OnInit {
     priority: new FormControl(99),
   });
 
-  private taskCopy: task | undefined;
+  taskCopy: task | undefined;
   private dialog?: HTMLDialogElement;
 
   constructor(
@@ -31,7 +31,7 @@ export class TaskEditComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router
   ) {
-    //TODO here be Pfusch, aber ich krieg den task in einer anderen route nicht ordentlich geladen
+    //TODO here be Pfusch, aber ich krieg den task nicht ordentlich geladen
     activatedRoute.paramMap.subscribe((paramMap) => {
       this.setForm(
         taskService.tasks().filter((x) => x.id === paramMap.get('id'))[0]
@@ -49,7 +49,7 @@ export class TaskEditComponent implements OnInit {
       'dlg'
     )[0] as HTMLDialogElement;
     this.dialog.showModal();
-    this.dialog.addEventListener('close', () => this.onClose())
+    this.dialog.addEventListener('close', () => this.onClose());
   }
 
   async onSubmit() {
@@ -99,9 +99,14 @@ export class TaskEditComponent implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['/board'])
+    this.router.navigate(['/board']);
   }
   open() {
     this.dialog?.showModal();
+  }
+
+  onDelete() {
+    if (this.taskCopy) this.taskService.deleteTask(this.taskCopy);
+    this.dialog?.close();
   }
 }

@@ -1,11 +1,4 @@
-@if(taskService.selectedTask()){
-  <p>selected Task: {{taskService.selectedTask()!.title}}</p>
-  <!-- <button (click)="taskService.deleteTask(taskService.selectedTask()!)">delete selection</button>
-  <button (click)="taskService.unsetSelectedTask()">clear selection</button> -->
-  <a [routerLink]="['/board/edit', taskService.selectedTask()?.id]">edit selected</a>
-}
-<!-- <pl-task-edit></pl-task-edit> -->
-<!-- <router-outlet></router-outlet> -->
+<a [routerLink]="['create']">add task</a> <!--Todo clear selected because it suddenly works now-->
 <div class="columnContainer">
   <pl-task-column [containedState]="1"></pl-task-column>
   <pl-task-column [containedState]="2"></pl-task-column>
