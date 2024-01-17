@@ -2,7 +2,7 @@ import { Component, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
 import { task } from '../../../task/task';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pl-task-edit',
@@ -28,16 +28,8 @@ export class TaskEditComponent implements OnInit {
 
   constructor(
     readonly taskService: TaskService,
-    private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router
   ) {
-    //TODO here be Pfusch, aber ich krieg den task nicht ordentlich geladen
-    activatedRoute.paramMap.subscribe((paramMap) => {
-      this.setForm(
-        taskService.tasks().filter((x) => x.id === paramMap.get('id'))[0]
-      );
-    });
-
     effect(() => {
       this.setForm(taskService.selectedTask());
     });

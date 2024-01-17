@@ -23,7 +23,10 @@ export class TaskComponent {
   };
   @Output() selectedTask = new EventEmitter<task>();
 
-  constructor(private readonly router: Router, private readonly taskService: TaskService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly taskService: TaskService
+  ) {}
 
   @HostListener('click')
   triggerOutput() {
@@ -34,6 +37,6 @@ export class TaskComponent {
 
   @HostListener('dblclick')
   onDoubleClick() {
-    this.router.navigate(['/board/edit', this.taskService.selectedTask()?.id ])
+    this.router.navigate(['/board/edit']);
   }
 }

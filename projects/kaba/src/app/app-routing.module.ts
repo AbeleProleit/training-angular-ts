@@ -6,7 +6,7 @@ import { TaskEditComponent } from './board/task-board/task-edit/task-edit.compon
 
 const routes: Routes = [
   { path: 'board', component: TaskBoardComponent },
-  { path: 'board/edit/:id', component: TaskEditComponent, title: 'edit' },
+  { path: 'board/edit', component: TaskEditComponent, title: 'edit' },
   { path: 'board/create', component: TaskEditComponent, title: 'create' },
   { path: '', redirectTo: '/board', pathMatch: 'full' },
   { path: '404', component: RessourceNotFoundComponent },
