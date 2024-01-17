@@ -1,4 +1,4 @@
-<a [routerLink]="['create']">add task</a> <!--Todo clear selected because it suddenly works now-->
+<button (click)="navigateCreate()">add task</button>
 <div class="columnContainer">
   <pl-task-column [containedState]="1"></pl-task-column>
   <pl-task-column [containedState]="2"></pl-task-column>
