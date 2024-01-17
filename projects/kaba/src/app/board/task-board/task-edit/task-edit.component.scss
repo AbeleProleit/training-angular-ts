@@ -1,8 +1,6 @@
 :host{
   display: block;
-  border-style: solid;
-  border-width: 3pt;
-  border-radius: 3pt;
-  margin: 3pt;
-  padding: 3pt;
+}
+dialog::backdrop{
+  background-color: hotpink;
 }

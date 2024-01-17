@@ -6,6 +6,8 @@ import {
   Output,
 } from '@angular/core';
 import { task, taskState } from '../../../../task/task';
+import { Router } from '@angular/router';
+import { TaskService } from '../../../../task/task.service';
 
 @Component({
   selector: 'pl-task',
@@ -21,10 +23,18 @@ export class TaskComponent {
   };
   @Output() selectedTask = new EventEmitter<task>();
 
+  constructor(private readonly router: Router, private readonly taskService: TaskService) {}
+
   @HostListener('click')
   triggerOutput() {
     // taskState.Unassigned should only ever be present in dummy data
     if (this.task?.status !== taskState.Unassigned)
       this.selectedTask.emit(this.task);
+  }
+
+  @HostListener('dblclick')
+  onDoubleClick() {
+    console.log('double click');
+    this.router.navigate(['/board/edit', this.taskService.selectedTask()?.id ])
   }
 }

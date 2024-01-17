@@ -1,50 +1,80 @@
-import { Component, effect } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, effect } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
 import { task } from '../../../task/task';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'pl-task-edit',
   templateUrl: './task-edit.component.html',
   styleUrl: './task-edit.component.scss',
 })
-export class TaskEditComponent {
+export class TaskEditComponent implements OnInit {
   taskForm = new FormGroup({
-    title: new FormControl('title', [Validators.required, Validators.minLength(3)]),
-    description: new FormControl('description', [Validators.required, Validators.minLength(3)]),
+    title: new FormControl('title', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    description: new FormControl('description', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
     status: new FormControl(1, [Validators.min(1), Validators.max(6)]),
     priority: new FormControl(99),
   });
 
   private taskCopy: task | undefined;
+  private dialog?: HTMLDialogElement;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
-    readonly taskService: TaskService
+    readonly taskService: TaskService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router
   ) {
+    //TODO here be Pfusch, aber ich krieg den task in einer anderen route nicht ordentlich geladen
+    activatedRoute.paramMap.subscribe((paramMap) => {
+      this.setForm(
+        taskService.tasks().filter((x) => x.id === paramMap.get('id'))[0]
+      );
+    });
+
     effect(() => {
       this.setForm(taskService.selectedTask());
     });
+    this.setForm(this.taskService.selectedTask());
+  }
+
+  ngOnInit(): void {
+    this.dialog = document.getElementsByClassName(
+      'dlg'
+    )[0] as HTMLDialogElement;
+    this.dialog.showModal();
+    this.dialog.addEventListener('close', () => this.onClose())
   }
 
   async onSubmit() {
     const submittableTask: task = {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
-      status: this.taskForm.value.status === null? 1 : this.taskForm.value.status!,
-      priority: this.taskForm.value.priority === null? 0 : this.taskForm.value.priority!,
+      status:
+        this.taskForm.value.status === null ? 1 : this.taskForm.value.status!,
+      priority:
+        this.taskForm.value.priority === null
+          ? 0
+          : this.taskForm.value.priority!,
     };
 
     if (this.taskCopy) {
       submittableTask.id = this.taskCopy.id;
     }
 
-    this.taskService.updateTask(submittableTask)
+    this.taskService.updateTask(submittableTask);
 
     console.log(this.taskForm.value);
 
     this.taskForm.reset();
     this.taskCopy = undefined;
+    this.dialog?.close();
   }
 
   onReset() {
@@ -68,4 +98,10 @@ export class TaskEditComponent {
     });
   }
 
+  onClose() {
+    this.router.navigate(['/board'])
+  }
+  open() {
+    this.dialog?.showModal();
+  }
 }

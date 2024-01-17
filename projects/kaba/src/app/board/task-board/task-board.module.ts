@@ -5,6 +5,7 @@ import { TaskBoardComponent } from './task-board.component';
 import { TaskComponent } from './task/task/task.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TaskComponent,
     TaskEditComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   exports: [TaskBoardComponent, TaskColumnComponent],
 })
 export class TaskBoardModule {}
