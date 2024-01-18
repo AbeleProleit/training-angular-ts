@@ -6,9 +6,8 @@
       <label for="title">Title: </label>
       <input id="title" type="text" formControlName="title" />
       <label for="description">Description: </label>
-      <input id="description" type="text" formControlName="description" />
-      <label for="status">status: </label> <!-- TODO Drop down selector -->
-      <input id="status" type="number" formControlName="status" />
+      <textarea id="description" type="text" formControlName="description" ></textarea>
+      <label for="status">status: </label>
       <select formControlName="status" id="status">
         <option *ngFor="let taskState of taskStates.taskStateValue()" ngValue="{{taskState}}">
           {{taskStates.taskStateName(taskState)}}</option>
