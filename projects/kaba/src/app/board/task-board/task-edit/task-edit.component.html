@@ -1,26 +1,22 @@
 <dialog class="dlg" #dlg>
-
-  <div class="container">
-
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-      <label for="title">Title: </label>
-      <input id="title" type="text" formControlName="title" />
-      <label for="description">Description: </label>
-      <textarea id="description" type="text" formControlName="description" ></textarea>
-      <label for="status">status: </label>
-      <select formControlName="status" id="status">
-        <option *ngFor="let taskState of taskStates.taskStateValue()" ngValue="{{taskState}}">
-          {{taskStates.taskStateName(taskState)}}</option>
-      </select>
-      <label for="priority">priority: </label>
-      <input id="priority" type="number" formControlName="priority" />
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <label for="title">Title: </label>
+    <input id="title" type="text" formControlName="title" placeholder="Title">
+    <label for="description">Description: </label>
+    <textarea id="description" type="text" formControlName="description" placeholder="Description"></textarea>
+    <label for="status">status: </label>
+    <select formControlName="status" id="status">
+      <option *ngFor="let taskState of taskStates.taskStateValue()" ngValue="{{taskState}}">
+        {{taskStates.taskStateName(taskState)}}</option>
+    </select>
+    <label for="priority">priority: </label>
+    <input id="priority" type="number" formControlName="priority" placeholder="0" />
+    <div class="buttonContainer">
       <button type="submit" [disabled]="!taskForm.valid">Submit</button>
       <button type="button" (click)="onReset()">Reset</button> <!--in a form buttons are type submit by default !-->
-      <button type="button" (click)="dlg.close()">close</button>
       <button [disabled]="!taskCopy" type="button" plConfirm="Do you really want to delete"
         (confirmed)="onDelete()">delete Task</button>
-    </form>
-
-  </div>
-
+      <button type="button" (click)="dlg.close()">close</button>
+    </div>
+  </form>
 </dialog>
