@@ -9,12 +9,17 @@
       <input id="description" type="text" formControlName="description" />
       <label for="status">status: </label> <!-- TODO Drop down selector -->
       <input id="status" type="number" formControlName="status" />
+      <select formControlName="status" id="status">
+        <option *ngFor="let taskState of taskStates.taskStateValue()" ngValue="{{taskState}}">
+          {{taskStates.taskStateName(taskState)}}</option>
+      </select>
       <label for="priority">priority: </label>
       <input id="priority" type="number" formControlName="priority" />
       <button type="submit" [disabled]="!taskForm.valid">Submit</button>
       <button type="button" (click)="onReset()">Reset</button> <!--in a form buttons are type submit by default !-->
       <button type="button" (click)="dlg.close()">close</button>
-      <button [disabled]="!taskCopy" type="button" plConfirm="Do you really want to delete" (confirmed)="onDelete()">delete Task</button>
+      <button [disabled]="!taskCopy" type="button" plConfirm="Do you really want to delete"
+        (confirmed)="onDelete()">delete Task</button>
     </form>
 
   </div>

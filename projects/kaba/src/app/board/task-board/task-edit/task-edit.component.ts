@@ -1,8 +1,9 @@
 import { Component, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../task/task.service';
-import { task } from '../../../task/task';
+import { task, taskState } from '../../../task/task';
 import { Router } from '@angular/router';
+import { taskStateValueProvider } from '../../../helper/taskStateValueProvider';
 
 @Component({
   selector: 'pl-task-edit',
@@ -19,10 +20,11 @@ export class TaskEditComponent implements OnInit {
       Validators.required,
       Validators.minLength(3),
     ]),
-    status: new FormControl(1, [Validators.min(1), Validators.max(6)]),
+    status: new FormControl('1', [Validators.min(1), Validators.max(6)]),
     priority: new FormControl(99),
   });
 
+  taskStates = taskStateValueProvider;
   taskCopy: task | undefined;
   private dialog?: HTMLDialogElement;
 
@@ -49,7 +51,9 @@ export class TaskEditComponent implements OnInit {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
       status:
-        this.taskForm.value.status === null ? 1 : this.taskForm.value.status!,
+        this.taskForm.value.status === null
+          ? 1
+          : (Number.parseInt(this.taskForm.value.status!) as taskState),
       priority:
         this.taskForm.value.priority === null
           ? 0
@@ -81,11 +85,10 @@ export class TaskEditComponent implements OnInit {
     }
 
     if (!isReset) this.taskCopy = structuredClone(task);
-
     this.taskForm.setValue({
       title: task.title,
       description: task.description,
-      status: task.status,
+      status: task.status.toString(), //TODO is there a way to use numbers in the selector?
       priority: task.priority,
     });
   }

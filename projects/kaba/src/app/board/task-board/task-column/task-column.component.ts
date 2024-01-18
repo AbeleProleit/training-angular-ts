@@ -9,7 +9,7 @@ import { TaskService } from '../../../task/task.service';
 })
 export class TaskColumnComponent {
   // what state this column represents
-  @Input() containedState: taskState = taskState.Unassigned;
+  @Input({required:true}) containedState!: taskState;
 
   get stateDescriptorText(): string {
     return taskState[this.containedState];

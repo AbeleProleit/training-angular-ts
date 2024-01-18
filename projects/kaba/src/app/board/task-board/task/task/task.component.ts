@@ -18,7 +18,7 @@ export class TaskComponent {
   @Input({ required: true }) task?: task = {
     title: 'dummy title',
     description: 'dummy description',
-    status: taskState.Unassigned,
+    status: taskState.Backlog,
     priority: 0,
   };
   @Output() selectedTask = new EventEmitter<task>();
@@ -30,8 +30,6 @@ export class TaskComponent {
 
   @HostListener('click')
   triggerOutput() {
-    // taskState.Unassigned should only ever be present in dummy data
-    if (this.task?.status !== taskState.Unassigned)
       this.selectedTask.emit(this.task);
   }
 

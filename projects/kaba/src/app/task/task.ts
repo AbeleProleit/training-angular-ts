@@ -1,6 +1,5 @@
 export enum taskState {
-  Unassigned,
-  Backlog,
+  Backlog = 1,
   InProgress,
   Review,
   Test,
