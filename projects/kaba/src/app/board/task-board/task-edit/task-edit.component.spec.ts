@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskEditComponent } from './task-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TaskEditComponent', () => {
   let component: TaskEditComponent;
@@ -8,10 +9,11 @@ describe('TaskEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TaskEditComponent]
+      declarations: [TaskEditComponent],
+      imports: [ReactiveFormsModule]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(TaskEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
